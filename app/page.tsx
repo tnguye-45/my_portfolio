@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { PortfolioSection } from "@/components/portfolio-section"
 import { PhotoGallery } from "@/components/photo-gallery"
+import { FreelancePhotos } from "@/components/freelance-photos"
 import { VideoReel } from "@/components/video-reel"
 import { CodeProjects } from "@/components/code-projects"
 import { AboutSection } from "@/components/about-section"
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <PortfolioSection />
       <PhotoGallery />
+      <FreelancePhotos />
       <VideoReel />
       <CodeProjects />
       <AboutSection />
