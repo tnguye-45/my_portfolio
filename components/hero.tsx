@@ -22,17 +22,17 @@ export function Hero() {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="space-y-8 max-w-4xl mx-auto">
           <p className="text-accent font-mono text-sm tracking-widest uppercase animate-fade-in">
-            Creative Developer & Visual Artist
+            Freelance Creative
           </p>
           
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance">
-            Crafting Digital
-            <span className="block text-muted-foreground">Experiences</span>
+            Peter Nguyen
+            <span className="block text-muted-foreground">Capturing Life</span>
           </h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">
-            I blend photography, videography, and code to create compelling visual stories 
-            and interactive experiences that captivate and inspire.
+            Freelance photographer, videographer, and developer. I capture moments, 
+            build digital experiences, and document life through my lens and code.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">

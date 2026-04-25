@@ -14,10 +14,10 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Creative Developer & Visual Artist',
-  description: 'Personal portfolio showcasing photography, videography, coding projects, and creative work.',
-  keywords: ['portfolio', 'photography', 'videography', 'developer', 'creative', 'design'],
-  authors: [{ name: 'Your Name' }],
+  title: 'Peter Nguyen | Freelance Photography, Videography & Developer',
+  description: 'Peter Nguyen - Freelance photographer, videographer, and developer. Capturing moments, building digital experiences, and documenting life.',
+  keywords: ['Peter Nguyen', 'freelance photographer', 'videographer', 'developer', 'photography', 'videography', 'coding'],
+  authors: [{ name: 'Peter Nguyen' }],
   icons: {
     icon: [
       {

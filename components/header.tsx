@@ -41,7 +41,7 @@ export function Header() {
             href="/"
             className="text-xl font-bold tracking-tight hover:text-accent transition-colors"
           >
-            YOUR<span className="text-accent">NAME</span>
+            PETER<span className="text-accent">NGUYEN</span>
           </Link>
 
           {/* Desktop Navigation */}

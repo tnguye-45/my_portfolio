@@ -26,7 +26,7 @@ export function Footer() {
             href="/"
             className="text-xl font-bold tracking-tight hover:text-accent transition-colors"
           >
-            YOUR<span className="text-accent">NAME</span>
+            PETER<span className="text-accent">NGUYEN</span>
           </Link>
 
           {/* Navigation */}
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Your Name. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Peter Nguyen. All rights reserved.</p>
         </div>
       </div>
     </footer>
