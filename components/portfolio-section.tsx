@@ -34,15 +34,7 @@ const portfolioItems: PortfolioItem[] = [
     image: "/portfolio/video-1.jpg",
     tags: ["Video", "Commercial", "Product"],
   },
-  {
-    id: 3,
-    title: "E-Commerce Platform",
-    category: "code",
-    description: "Full-stack web application with modern UI/UX",
-    image: "/portfolio/code-1.jpg",
-    link: "https://github.com",
-    tags: ["React", "Node.js", "TypeScript"],
-  },
+
   {
     id: 4,
     title: "Portrait Series",
@@ -51,14 +43,7 @@ const portfolioItems: PortfolioItem[] = [
     image: "/portfolio/photo-2.jpg",
     tags: ["Photography", "Portrait", "Studio"],
   },
-  {
-    id: 5,
-    title: "Brand Identity",
-    category: "other",
-    description: "Complete visual identity for a startup company",
-    image: "/portfolio/other-1.jpg",
-    tags: ["Design", "Branding", "Identity"],
-  },
+
   {
     id: 6,
     title: "Music Video",
@@ -76,14 +61,7 @@ const portfolioItems: PortfolioItem[] = [
     link: "https://github.com",
     tags: ["Next.js", "D3.js", "AI"],
   },
-  {
-    id: 8,
-    title: "Motion Graphics",
-    category: "other",
-    description: "Animated explainer video for SaaS product",
-    image: "/portfolio/other-2.jpg",
-    tags: ["Animation", "Motion", "Design"],
-  },
+
 ]
 
 const categories: { value: Category; label: string; icon: React.ReactNode }[] = [
