@@ -20,6 +20,12 @@ The portfolio media lives in `lib/portfolio-media.ts`.
 
 Supported photo aspects are `portrait`, `landscape`, and `square`.
 
+The latest freelance additions expect these filenames:
+
+- `public/photos/korean-portrait-stairs.jpg`
+- `public/photos/hanbok-park-candid.jpg`
+- `public/photos/dj-stage-smoke.jpg`
+
 ## Videos
 
 1. Put video files in `public/videos`.

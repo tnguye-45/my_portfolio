@@ -69,6 +69,33 @@ const eventPhotos: PhotoItem[] = [
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09929-gCtVdLA5uUuPvH4wIKIVmMWhTsbaOH.jpg",
     aspect: "portrait",
   },
+  {
+    id: "dj-stage-smoke",
+    title: "DJ Stage Smoke",
+    category: "Event",
+    src: "/photos/dj-stage-smoke.jpg",
+    alt: "DJ working on stage with bright haze and lighting",
+    aspect: "landscape",
+  },
+]
+
+const portraitPhotos: PhotoItem[] = [
+  {
+    id: "korean-portrait-stairs",
+    title: "Korean Portrait - Stairs",
+    category: "Portrait",
+    src: "/photos/korean-portrait-stairs.jpg",
+    alt: "Portrait of a woman walking down steps with a person in red traditional clothing behind her",
+    aspect: "portrait",
+  },
+  {
+    id: "hanbok-park-candid",
+    title: "Hanbok Park Candid",
+    category: "Portrait",
+    src: "/photos/hanbok-park-candid.jpg",
+    alt: "Candid portrait of two people in colorful traditional Korean clothing by a lake",
+    aspect: "portrait",
+  },
 ]
 
 const foodPhotos: PhotoItem[] = [
@@ -98,7 +125,7 @@ const foodPhotos: PhotoItem[] = [
 // To add more photos tonight:
 // 1. Save the image in /public/photos.
 // 2. Add a PhotoItem below with src: "/photos/your-file-name.jpg".
-export const photoGallery: PhotoItem[] = [...eventPhotos, ...foodPhotos]
+export const photoGallery: PhotoItem[] = [...portraitPhotos, ...eventPhotos, ...foodPhotos]
 
 export const freelancePhotos: PhotoItem[] = photoGallery
 
