@@ -33,7 +33,7 @@ export type VideoItem = {
   thumbnail?: string
 }
 
-const eventPhotos = [
+const eventPhotos: PhotoItem[] = [
   {
     id: "dj-performance-blue-lights",
     title: "DJ Performance - Blue Lights",
@@ -69,9 +69,9 @@ const eventPhotos = [
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09929-gCtVdLA5uUuPvH4wIKIVmMWhTsbaOH.jpg",
     aspect: "portrait",
   },
-] satisfies PhotoItem[]
+]
 
-const foodPhotos = [
+const foodPhotos: PhotoItem[] = [
   {
     id: "holiday-feast-spread",
     title: "Holiday Feast Spread",
@@ -93,16 +93,16 @@ const foodPhotos = [
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09597.JPG-iI4TpAZh6jMSmRy5zpvPmRVOsqd0Bb.jpeg",
     aspect: "landscape",
   },
-] satisfies PhotoItem[]
+]
 
 // To add more photos tonight:
 // 1. Save the image in /public/photos.
 // 2. Add a PhotoItem below with src: "/photos/your-file-name.jpg".
-export const photoGallery = [...eventPhotos, ...foodPhotos] satisfies PhotoItem[]
+export const photoGallery: PhotoItem[] = [...eventPhotos, ...foodPhotos]
 
-export const freelancePhotos = photoGallery satisfies PhotoItem[]
+export const freelancePhotos: PhotoItem[] = photoGallery
 
-export const portfolioItems = [
+export const portfolioItems: PortfolioItem[] = [
   {
     id: "live-event-coverage",
     title: "Live Event Coverage",
@@ -143,21 +143,21 @@ export const portfolioItems = [
     link: "https://github.com",
     tags: ["Next.js", "D3.js", "AI"],
   },
-] satisfies PortfolioItem[]
+]
 
-export const featuredVideo = {
+export const featuredVideo: VideoItem = {
   id: "demo-reel",
   title: "Demo Reel",
   client: "Featured Video",
   duration: "Add runtime",
   description: "Drop your reel into /public/videos and set videoSrc to publish it here.",
-} satisfies VideoItem
+}
 
 // To add videos tonight:
 // 1. Save MP4/WebM files in /public/videos.
 // 2. Save optional poster images in /public/video-thumbnails.
 // 3. Add videoSrc: "/videos/your-video.mp4" or embedUrl for YouTube/Vimeo.
-export const videos = [
+export const videos: VideoItem[] = [
   {
     id: "brand-story-film",
     title: "Brand Story Film",
@@ -179,4 +179,4 @@ export const videos = [
     duration: "3:15",
     description: "Fast-paced recap edit for event promotion and client delivery.",
   },
-] satisfies VideoItem[]
+]
