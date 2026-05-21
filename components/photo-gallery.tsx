@@ -1,17 +1,19 @@
 "use client"
 
-import { Camera } from "lucide-react"
+import { useState } from "react"
+import Image from "next/image"
+import { Camera, X } from "lucide-react"
+import { photoGallery, type PhotoItem } from "@/lib/portfolio-media"
 
-const photos = [
-  { id: 1, title: "Sunset Silhouette", aspect: "portrait" },
-  { id: 2, title: "City Lights", aspect: "landscape" },
-  { id: 3, title: "Mountain Peak", aspect: "landscape" },
-  { id: 4, title: "Street Portrait", aspect: "portrait" },
-  { id: 5, title: "Abstract Lines", aspect: "square" },
-  { id: 6, title: "Nature Close-up", aspect: "landscape" },
-]
+const aspectClasses: Record<PhotoItem["aspect"], string> = {
+  portrait: "aspect-[3/4]",
+  landscape: "aspect-[4/3]",
+  square: "aspect-square",
+}
 
 export function PhotoGallery() {
+  const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null)
+
   return (
     <section id="photo" className="py-24 md:py-32 bg-card/50">
       <div className="container mx-auto px-6">
@@ -30,23 +32,35 @@ export function PhotoGallery() {
 
         {/* Masonry-style Grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-          {photos.map((photo, index) => (
+          {photoGallery.map((photo) => (
             <div
               key={photo.id}
-              className={`relative break-inside-avoid group cursor-pointer ${
-                photo.aspect === "portrait" ? "aspect-[3/4]" : 
-                photo.aspect === "landscape" ? "aspect-[4/3]" : "aspect-square"
-              } bg-secondary rounded-lg overflow-hidden border border-border hover:border-accent/50 transition-all`}
+              onClick={() => setSelectedPhoto(photo)}
+              className={`relative break-inside-avoid group cursor-pointer ${aspectClasses[photo.aspect]} bg-secondary rounded-lg overflow-hidden border border-border hover:border-accent/50 transition-all`}
             >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-muted-foreground text-sm">{photo.title}</span>
-              </div>
+              {photo.src ? (
+                <Image
+                  src={photo.src}
+                  alt={photo.alt ?? photo.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+                  <span className="text-muted-foreground text-sm">
+                    Add photo: {photo.title}
+                  </span>
+                </div>
+              )}
               
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="text-center">
                   <p className="text-foreground font-medium">{photo.title}</p>
-                  <p className="text-sm text-muted-foreground mt-1">Click to view</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    {photo.src ? "Click to view" : "Add a file path in portfolio-media.ts"}
+                  </p>
                 </div>
               </div>
             </div>
@@ -55,14 +69,56 @@ export function PhotoGallery() {
 
         <div className="text-center mt-12">
           <a
-            href="#"
+            href="#freelance"
             className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full text-sm font-medium hover:border-accent hover:text-accent transition-colors"
           >
-            View Full Gallery
+            View Freelance Gallery
             <Camera className="h-4 w-4" />
           </a>
         </div>
       </div>
+
+      {selectedPhoto && (
+        <div
+          className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedPhoto(null)}
+        >
+          <button
+            onClick={() => setSelectedPhoto(null)}
+            className="absolute top-6 right-6 p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+            aria-label="Close photo preview"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          <div
+            className="relative max-w-5xl max-h-[85vh] w-full h-full"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {selectedPhoto.src ? (
+              <Image
+                src={selectedPhoto.src}
+                alt={selectedPhoto.alt ?? selectedPhoto.title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            ) : (
+              <div className="h-full rounded-xl border border-border bg-secondary flex items-center justify-center px-6 text-center">
+                <p className="text-muted-foreground">
+                  Add a photo source for {selectedPhoto.title} in lib/portfolio-media.ts.
+                </p>
+              </div>
+            )}
+          </div>
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+            <p className="text-foreground font-medium text-lg">{selectedPhoto.title}</p>
+            <p className="text-sm text-muted-foreground">{selectedPhoto.category}</p>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
