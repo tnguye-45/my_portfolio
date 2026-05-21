@@ -3,69 +3,23 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Aperture, X } from "lucide-react"
+import { freelancePhotos, type PhotoItem } from "@/lib/portfolio-media"
 
-const freelancePhotos = [
-  {
-    id: 1,
-    title: "DJ Performance - Blue Lights",
-    category: "Event",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09872-GuKZAgpXkWuzSnICdqpHYsExaGExiI.jpg",
-    aspect: "landscape",
-  },
-  {
-    id: 2,
-    title: "DJ Portrait - Red & Blue",
-    category: "Event",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09759-LYqJLGmNXRKKrbz9MFcyMD1oRW2jNg.jpg",
-    aspect: "portrait",
-  },
-  {
-    id: 3,
-    title: "Holiday Feast Spread",
-    category: "Food",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09619.JPG-XLDWcL6p4pZz84epkq8mMnp5r2vNO9.jpeg",
-    aspect: "landscape",
-  },
-  {
-    id: 4,
-    title: "DJ Duo - Smoke Effects",
-    category: "Event",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC00434-33Jif76cv6qktajXWx6C3deCeZzGvX.jpg",
-    aspect: "landscape",
-  },
-  {
-    id: 5,
-    title: "DJ Back View - Stage Lights",
-    category: "Event",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC00078-VnySK5APpPcD5Etq8zTknWD3TRAeTV.jpg",
-    aspect: "portrait",
-  },
-  {
-    id: 6,
-    title: "DJ Mixing - Purple Haze",
-    category: "Event",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09929-gCtVdLA5uUuPvH4wIKIVmMWhTsbaOH.jpg",
-    aspect: "portrait",
-  },
-  {
-    id: 7,
-    title: "Thanksgiving Dinner",
-    category: "Food",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09630.JPG-MMynwFz7AgJplPOQUYNagGmOejGrJY.jpeg",
-    aspect: "landscape",
-  },
-  {
-    id: 8,
-    title: "Dinner Gathering",
-    category: "Food",
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DSC09597.JPG-iI4TpAZh6jMSmRy5zpvPmRVOsqd0Bb.jpeg",
-    aspect: "landscape",
-  },
-]
+type FilterCategory = "all" | PhotoItem["category"]
+
+const filterCategories = Array.from(
+  new Set(freelancePhotos.map((photo) => photo.category))
+) as PhotoItem["category"][]
+
+const aspectClasses: Record<PhotoItem["aspect"], string> = {
+  portrait: "aspect-[3/4]",
+  landscape: "aspect-[4/3]",
+  square: "aspect-square",
+}
 
 export function FreelancePhotos() {
-  const [selectedPhoto, setSelectedPhoto] = useState<typeof freelancePhotos[0] | null>(null)
-  const [filter, setFilter] = useState<"all" | "Event" | "Food">("all")
+  const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null)
+  const [filter, setFilter] = useState<FilterCategory>("all")
 
   const filteredPhotos = filter === "all" 
     ? freelancePhotos 
@@ -89,7 +43,7 @@ export function FreelancePhotos() {
 
         {/* Filter Buttons */}
         <div className="flex justify-center gap-3 mb-12">
-          {(["all", "Event", "Food"] as const).map((category) => (
+          {(["all", ...filterCategories] as FilterCategory[]).map((category) => (
             <button
               key={category}
               onClick={() => setFilter(category)}
@@ -110,17 +64,23 @@ export function FreelancePhotos() {
             <div
               key={photo.id}
               onClick={() => setSelectedPhoto(photo)}
-              className={`relative break-inside-avoid group cursor-pointer ${
-                photo.aspect === "portrait" ? "aspect-[3/4]" : "aspect-[4/3]"
-              } rounded-lg overflow-hidden border border-border hover:border-accent/50 transition-all`}
+              className={`relative break-inside-avoid group cursor-pointer ${aspectClasses[photo.aspect]} rounded-lg overflow-hidden border border-border hover:border-accent/50 transition-all bg-secondary`}
             >
-              <Image
-                src={photo.src}
-                alt={photo.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
+              {photo.src ? (
+                <Image
+                  src={photo.src}
+                  alt={photo.alt ?? photo.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center px-4 text-center">
+                  <span className="text-muted-foreground text-sm">
+                    Add photo: {photo.title}
+                  </span>
+                </div>
+              )}
               
               {/* Category Badge */}
               <div className="absolute top-3 left-3">
@@ -159,14 +119,22 @@ export function FreelancePhotos() {
             className="relative max-w-5xl max-h-[85vh] w-full h-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image
-              src={selectedPhoto.src}
-              alt={selectedPhoto.title}
-              fill
-              className="object-contain"
-              sizes="100vw"
-              priority
-            />
+            {selectedPhoto.src ? (
+              <Image
+                src={selectedPhoto.src}
+                alt={selectedPhoto.alt ?? selectedPhoto.title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            ) : (
+              <div className="h-full rounded-xl border border-border bg-secondary flex items-center justify-center px-6 text-center">
+                <p className="text-muted-foreground">
+                  Add a photo source for {selectedPhoto.title} in lib/portfolio-media.ts.
+                </p>
+              </div>
+            )}
           </div>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
